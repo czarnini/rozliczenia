@@ -1,29 +1,41 @@
 package v1;
 
-public class Pair <A, B> 
+public class Pair 
 {
-	private A first;
-	private B second;
+	private Person first;
+	private double second;
 	
-	public Pair(A first, B second)
+	public Pair(Person first, Double second)
 	{
 		this.first = first;
 		this.second = second;	
 	}
-	public void setFirst(A newFirst)
+	public void setFirst(Person newFirst)
 	{
 		first = newFirst;
 	}
-	public A getFirst()
+	public Person getFirst()
 	{
 		return first;
 	}
-	public void setSecond(B newSecond)
+	public void setSecond(Double newSecond)
 	{
 		second = newSecond;
 	}
-	public B getSecond()
+	
+	public Double getSecond()
 	{
 		return second;
-	}	
+	}
+	
+	public void increase(Double x)
+	{
+		second += x;
+	}
+	
+	public void decrease(Double x)
+	{
+		second -= x;
+	}
+	
 }	
