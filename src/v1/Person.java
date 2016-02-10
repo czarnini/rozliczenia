@@ -2,7 +2,7 @@ package v1;
 
 public class Person {
 
-	public static int counter;
+	private static int counter = 0;
 	private String name;
 	private int personID;
 	
@@ -26,8 +26,5 @@ public class Person {
 	{
 		return personID;
 	}
-	public void setID(int ID)
-	{
-		personID = ID;
-	}
+	
 }
