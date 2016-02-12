@@ -129,7 +129,7 @@ public class Bill {
 	    	if (tmp.getSecond()<0)
 	    	{
 	    		Person newOwer = tmp.getFirst();
-	    		tmp.multiply(-1);
+	    		tmp.multiply(-1.0);
 	    		whoOwes.add(0, newOwer);
 	    		
 	    		
