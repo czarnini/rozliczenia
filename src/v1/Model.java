@@ -5,4 +5,5 @@ public class Model {
 	{
 	for (int i=0; i<1; ++i);
 	}
+	//to jest linijka. Ta linijka ma na celu bycie linijk¹. Taka se, linijka.
 }
