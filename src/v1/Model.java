@@ -6,4 +6,4 @@ public class Model {
 	for (int i=0; i<1; ++i);
 	}
 }
-//kurwaocochodzi
+//kurwa ocochodzi
