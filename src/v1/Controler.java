@@ -6,22 +6,21 @@ import java.util.Collections;
 
 public class Controler {
 
-	private View view;
-	private Model model;
+	View view;
+	Model model;
 	
-	public Controler()
+	public Controler(Model model, View view)
 	{
-		view = new View();
-		model = new Model();
+		this.model = model;
+		this.view = view;
+		view.linkControler(this);
+		//model.linkControler(this);
 	}
 
-	/* public static void main(String[] args) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					Controler gameControler = new Controler();
-				}
-			});
-		}*/
+	 void appStart()
+	 {
+		 view.createMenu();
+	 }
 	
 	
 	/*

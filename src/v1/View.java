@@ -3,13 +3,22 @@ package v1;
 import javax.swing.JFrame;
 
 public class View {
-	private OptionFrame option;
-	private AddDebtFrame addDebt;
+	Controler controler;
+	JFrame frame;
+	
 	
 	public View()
 	{
-		option = new OptionFrame();
+		frame = new JFrame();
+		
 	}
-	
+	void linkControler (Controler controler)
+	{
+		this.controler = controler;
+	}
+	void createMenu()
+	{
+		
+	}
 
 }
