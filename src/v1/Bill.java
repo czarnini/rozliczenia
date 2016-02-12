@@ -122,7 +122,6 @@ public class Bill {
 	   
 		// 5. If amount of money given by any of the payers is below 0 multiply by -1
 		// 	  and add this payer as debtor
-	    //Collections.sort(whoPaid, new IncreasingComparator ());
 	    for(int i = whoPaid.size()-1; i>=0; --i)
 	    {
 	    	Pair tmp = whoPaid.get(i);
