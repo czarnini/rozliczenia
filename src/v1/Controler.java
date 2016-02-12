@@ -24,7 +24,7 @@ public class Controler {
 		}*/
 	
 	
-	
+	/*
 	 public static void main(String[] args) {
 		 Person o1, o2;
 		 ArrayList<Pair> lol = new ArrayList<Pair>();
@@ -47,5 +47,5 @@ public class Controler {
 		}
 		 
 			
-		}
+		}*/
 }
