@@ -78,7 +78,7 @@ public class View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO newBill();
-				
+				    
 			}
 		});
 		menuPanel.add(Box.createGlue());
