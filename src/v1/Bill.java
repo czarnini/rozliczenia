@@ -136,7 +136,7 @@ public class Bill {
 	    		for(int j=0;  j < whoPaid.size(); ++j)
 	    		{
 	    			delta = whoPaid.get(j).getSecond() - tmp.getSecond();
-	    			if(delta < 0)
+	    			if(delta <= 0)
 	    			{
 	    				newOwer.addDebtor(whoPaid.get(j)); // Jth person gets all his money from from tmp	
 	    				tmp.setSecond(delta * (-1.0));
@@ -147,7 +147,6 @@ public class Bill {
 	    			{
 	    				newOwer.addDebtor(whoPaid.get(j).getFirst(), tmp.getSecond());
 	    				whoPaid.get(j).decrease(tmp.getSecond());
-	    				whoPaid.remove(i);
 	    				break;
 	    			}
 	    		}
@@ -156,8 +155,32 @@ public class Bill {
 	    }
 		
 		// 6. For each debtor take take next payer in the list and give him as much money as possible
-
-		//
+		//@TODO BONUSES!
+	    Collections.sort(whoPaid, new DecreasingComparator ());
+	    for(Person tmpDebt: whoOwes)
+	    {
+	    	double hasToPay = perCapita;
+	    	for(Pair tmpPay: whoPaid)
+	    	{
+	    		double delta = tmpPay.getSecond() - hasToPay;
+	    				
+	    		if (delta <= 0) // perCapita is greater (or equal)than tmpPay should get
+	    		{
+	    			tmpDebt.addDebtor(tmpPay);
+	    			tmpPay.setSecond(0.0);
+	    			hasToPay -= tmpPay.getSecond();
+	    			if (delta == 0)
+	    				break;
+	    		}
+	    		else  
+	    		{
+	    			tmpDebt.addDebtor(tmpPay.getFirst(), hasToPay);
+	    			tmpPay.decrease(hasToPay);
+	    			break;
+	    		}
+	    	
+	    	}
+	    }
 		
 		
 	}
