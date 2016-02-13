@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Bill {
 	private double amount;
-	private ArrayList < Pair > whoPaid;
+	private ArrayList <Pair>   whoPaid;
 	private ArrayList <Person> whoOwes;
 	private ArrayList <Pair>   bonuses; 
 	
@@ -122,19 +122,65 @@ public class Bill {
 	   
 		// 5. If amount of money given by any of the payers is below 0 multiply by -1
 		// 	  and add this payer as debtor
-	    Collections.sort(whoPaid, new IncreasingComparator ());
-	    for(Pair tmp: whoPaid)
+	    for(int i = whoPaid.size()-1; i>=0; --i)
 	    {
+	    	Pair tmp = whoPaid.get(i);
 	    	if (tmp.getSecond()<0)
 	    	{
-	    		//@TODO gdzie wpisywac dlugi?
-	    	}
+	    		Person newOwer = tmp.getFirst();
+	    		tmp.multiply(-1.0);
+	    		whoOwes.add(0, newOwer);
+	    		
+	    		
+	    		double delta;
+	    		for(int j=0;  j < whoPaid.size(); ++j)
+	    		{
+	    			delta = whoPaid.get(j).getSecond() - tmp.getSecond();
+	    			if(delta <= 0)
+	    			{
+	    				newOwer.addDebtor(whoPaid.get(j)); // Jth person gets all his money from from tmp	
+	    				tmp.setSecond(delta * (-1.0));
+	    				whoPaid.get(j).setSecond(0.0);
+	    				whoPaid.remove(i);
+	    			}
+	    			else
+	    			{
+	    				newOwer.addDebtor(whoPaid.get(j).getFirst(), tmp.getSecond());
+	    				whoPaid.get(j).decrease(tmp.getSecond());
+	    				break;
+	    			}
+	    		}
+	    	} 
 	    	else break;
 	    }
 		
 		// 6. For each debtor take take next payer in the list and give him as much money as possible
-
-		//
+		//@TODO BONUSES!
+	    Collections.sort(whoPaid, new DecreasingComparator ());
+	    for(Person tmpDebt: whoOwes)
+	    {
+	    	double hasToPay = perCapita;
+	    	for(Pair tmpPay: whoPaid)
+	    	{
+	    		double delta = tmpPay.getSecond() - hasToPay;
+	    				
+	    		if (delta <= 0) // perCapita is greater (or equal)than tmpPay should get
+	    		{
+	    			tmpDebt.addDebtor(tmpPay);
+	    			tmpPay.setSecond(0.0);
+	    			hasToPay -= tmpPay.getSecond();
+	    			if (delta == 0)
+	    				break;
+	    		}
+	    		else  
+	    		{
+	    			tmpDebt.addDebtor(tmpPay.getFirst(), hasToPay);
+	    			tmpPay.decrease(hasToPay);
+	    			break;
+	    		}
+	    	
+	    	}
+	    }
 		
 		
 	}

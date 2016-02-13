@@ -9,8 +9,8 @@ public class Rozliczenia {
 			public void run() {
 				Model model = new Model();
 				View view = new View();
-				Controler gameControler = new Controler(model, view);
-				gameControler.appStart();
+				Controler controler = new Controler(model, view);
+				controler.appStart();
 			}
 		});
 	}

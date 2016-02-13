@@ -38,4 +38,9 @@ public class Pair
 		second -= x;
 	}
 	
+	public void multiply (Double x)
+	{
+		second *=x;
+	}
+	
 }	
