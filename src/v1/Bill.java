@@ -160,10 +160,12 @@ public class Bill {
 	    for(Person tmpDebt: whoOwes)
 	    {
 	    	double hasToPay = perCapita;
+	    	System.out.println("Rozliczam: "+tmpDebt.getName());
+	    	
 	    	for(Pair tmpPay: whoPaid)
 	    	{
 	    		double delta = tmpPay.getSecond() - hasToPay;
-	    				
+	    		System.out.println("Daje: "+tmpPay.getFirst().getName());		
 	    		if (delta <= 0) // perCapita is greater (or equal)than tmpPay should get
 	    		{
 	    			tmpDebt.addDebtor(tmpPay);

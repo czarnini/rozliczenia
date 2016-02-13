@@ -10,7 +10,8 @@ public class Rozliczenia {
 				Model model = new Model();
 				View view = new View();
 				Controler controler = new Controler(model, view);
-				controler.appStart();
+				//controler.appStart();
+				model.test1();
 			}
 		});
 	}
