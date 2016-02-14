@@ -26,6 +26,27 @@ public class Person {
 		name = newName;
 	}
 	
+	public boolean anyRelation(Person friend)
+	{
+		for(Pair tempWho: whoOwsWhom)
+		{
+			if(tempWho.getFirst().getName().equals(friend.getName()))
+				return true;
+		}
+	
+		return false;
+	}
+	
+	public double howBigDebtIs(Person friend)
+	{
+		for(Pair tempWho: whoOwsWhom)
+		{
+			if(tempWho.getFirst().getName().equals(friend.getName()))
+				return tempWho.getSecond();
+		}
+		return 0;
+	}
+	
 	public int getID()
 	{
 		return personID;

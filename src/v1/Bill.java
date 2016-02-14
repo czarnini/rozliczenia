@@ -13,7 +13,7 @@ public class Bill {
 	{
 		amount = 0;
 		whoOwes = new ArrayList <Person>();
-		whoPaid = new ArrayList< Pair>();
+		whoPaid = new ArrayList <Pair>();
 	}
 	
 	public  void addDebtor(Person newDebtor)
