@@ -28,6 +28,10 @@ public class Bill {
 		amount += newPair.getSecond();
 	
 	}
+	public int numberOfFriends()
+	{
+		return (whoPaid.size() + whoOwes.size());
+	}
 	
 	public void addBonuser()
 	{
@@ -61,7 +65,7 @@ public class Bill {
 	{
 		double  perCapita=0,
 				wasPaid=0,
-				peopleInEvent=whoOwes.size()+whoPaid.size();
+				peopleInEvent=whoOwes.size()+whoPaid.size(); //what if someone takes bonus only??
 		
 		// 1. Add money given by payers, check if there is something left, sort payers by amount of money paid
 		for(Pair tmp: whoPaid)
@@ -186,8 +190,5 @@ public class Bill {
 		
 		
 	}
-	public void addDebtToTable()
-	{
-		
-	}
+
 }
