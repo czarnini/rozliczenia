@@ -39,19 +39,39 @@ public class DebtTable {
 					{
 						if(mainList.anyRelation(tempOwes.getFirst()))
 						{
-							double howMuch;
+							double howMuch1;
 							double howMuch2 = tempPaid.getSecond();
 							double howMuch3 = tempOwes.getSecond();
-							howMuch = mainList.howBigDebtIs(tempOwes.getFirst());
+							howMuch1 = mainList.howBigDebtIs(tempOwes.getFirst());
 							
-							howMuch = Math.min(howMuch, howMuch2);
+							double howMuch = Math.min(howMuch1, howMuch2);
 							howMuch = Math.min(howMuch, howMuch3);
 							
+							tempPaid.setSecond(tempPaid.getSecond() - howMuch);
+							tempOwes.setSecond(tempOwes.getSecond() - howMuch);
+							mainList.newDebt(tempOwes.getFirst(), howMuch1 - howMuch);
+							
+							if(howMuch == howMuch2)
+								whoPaid.remove(tempPaid);
+							else if(howMuch == howMuch3)
+								whoOwes.remove(tempOwes);
 						}
 					}
 									
 				}
 			}
 		}
+		
+		for(Pair tempPaid: whoPaid)
+		{
+			for(Pair tempOwes: whoOwes)
+			{
+				double howMuch = tempPaid.getSecond();
+				double howMuch2 = tempOwes.getSecond();
+				howMuch = Math.min(howMuch, howMuch2);
+				
+			}
+		}
+		
 	}
 }

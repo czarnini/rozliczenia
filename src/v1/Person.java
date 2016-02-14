@@ -47,6 +47,20 @@ public class Person {
 		return 0;
 	}
 	
+	public void newDebt(Person friend, double newDebt)
+	{
+		for(Pair tempWho: whoOwsWhom)
+		{
+			if(tempWho.getFirst().getName().equals(friend.getName()))
+			{
+				if(newDebt == 0)
+					whoOwsWhom.remove(tempWho);
+				else
+					tempWho.setSecond(newDebt);
+			}
+		}
+	}
+	
 	public int getID()
 	{
 		return personID;
