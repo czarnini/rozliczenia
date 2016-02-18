@@ -4,17 +4,35 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Bill {
+
+	private static int counter=0;
+	
+	private int ID;
+	private String eventName;
 	private double amount;
 	private ArrayList <Pair>   whoPaid;
 	private ArrayList <Debtor> whoOwes;
-	private ArrayList <Pair>   bonuses; 
+	private ArrayList <Pair>   bonuses;
 	
 	public Bill()
 	{
+		ID = counter;
+		++counter;
 		amount = 0;
 		whoOwes = new ArrayList <Debtor>();
 		whoPaid = new ArrayList <Pair>	();
 		bonuses = new ArrayList	<Pair>	();
+	}
+	
+	public Bill( double howMuch, ArrayList<Pair> Payers,
+				 ArrayList<Debtor> Creditors, ArrayList<Pair> rpk)
+	{
+		ID = counter;
+		++counter;
+		amount  = howMuch;
+		whoPaid = Payers;
+		whoOwes = Creditors;
+		bonuses = rpk;
 	}
 	
 	public  void addDebtor(Person who)

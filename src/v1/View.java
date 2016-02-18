@@ -22,7 +22,7 @@ public class View {
 	{
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("RozLicz Siê v0.1");
+		frame.setTitle("RozLicz Sie v0.1");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int)screenSize.getWidth();
 		screenHeight = (int)screenSize.getHeight();
@@ -38,8 +38,8 @@ public class View {
 		Dimension buttonSize = new Dimension(200,60);
 		JPanel menuPanel = new JPanel();
 		JButton buttonNewBill = new JButton("Dodaj rachunek");
-		JButton buttonDebtTable = new JButton ("Tabela d³ugów");
-		JButton buttonExit = new JButton ("WyjdŸ");
+		JButton buttonDebtTable = new JButton ("Tabela dï¿½ugï¿½w");
+		JButton buttonExit = new JButton ("Wyjdï¿½");
 		
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 		
