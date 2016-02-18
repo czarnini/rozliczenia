@@ -13,7 +13,8 @@ public class Bill {
 	{
 		amount = 0;
 		whoOwes = new ArrayList <Debtor>();
-		whoPaid = new ArrayList <Pair>();
+		whoPaid = new ArrayList <Pair>	();
+		bonuses = new ArrayList	<Pair>	();
 	}
 	
 	public  void addDebtor(Person who)
@@ -34,39 +35,17 @@ public class Bill {
 		return (whoPaid.size() + whoOwes.size());
 	}
 	
-	public void addBonuser()
+	public void addBonus(Person whose, Double howMuch)
 	{
-		
-		for (Pair tmp: whoPaid)
-		{
-			Pair newPair = new Pair(tmp.getFirst() , 0.0);
-			bonuses.add(newPair);
-		}
-		for (Debtor tmp: whoOwes)
-		{
-			Pair newPair = new Pair(tmp.getWho() , 0.0);
-			bonuses.add(newPair);
-		}
-		
-	}
-	
-	public void setBonus(Person whose, double howMuch)
-	{
-		for(Pair tmp: bonuses)
-		{
-			if (tmp.getFirst() == whose)
-			{
-				tmp.setSecond(howMuch);
-				break;
-			}
-		}
+		Pair newBonus = new Pair(whose, howMuch);
+		bonuses.add(newBonus);
 	}
 	
 	public void printAllDebts()
 	{
 		for (Debtor tmp: whoOwes)
 		{
-			System.out.println(tmp.getWho().getName()+"  Owes:");
+			System.out.println(tmp.getWho().getName()+"\tDaje:");
 			tmp.showDebts();
 			System.out.println("------------------------------");
 		}
@@ -106,6 +85,7 @@ public class Bill {
 		// 3. Subtract perCapita from money given by payers
 		//	  3a. if payer had any bonuses subtract them as well 
 	    // 	  3b. sort the payers list
+	    //	  3c. add bonuses of Debtors to their debt
 	    for(Pair tmp: whoPaid)
 	    {
 	    	tmp.decrease(perCapita);
@@ -113,13 +93,25 @@ public class Bill {
 	    	{
 	    		for(Pair find: bonuses)
 	    		{
-	    			if (find.getFirst() == tmp.getFirst() )
+	    			if (find.getFirst() == tmp.getFirst() && find.getSecond() != 0.0)
 	    			{
 	    				tmp.decrease(find.getSecond());
 	    			}
 	    		}
 	    	}
 	    }
+	    
+		for(Debtor tmpDebt: whoOwes)
+		{
+		    for (Pair tmpBonus: bonuses)
+		    {
+		    	if(tmpBonus.getSecond() !=0 && tmpBonus.getFirst() == tmpDebt.getWho())
+		    	{
+		    		tmpDebt.increaseDebt(tmpBonus.getSecond());
+		    	}
+		    }
+		}
+	    
 	    Collections.sort(whoPaid, new DecreasingComparator ());
 	    // 4.  if there is any change give as much as possible of it to the most generous payer
 	    for(int i=0;wasPaid != 0; ++i)
@@ -150,6 +142,7 @@ public class Bill {
 	    		tmp.multiply(-1.0);
 	    		whoOwes.add(0, newOwer);
 	    		newOwer.setDebt(tmp.getSecond());
+	    		whoPaid.remove(i);
 	    	} 
 	    	else break;
 	    }

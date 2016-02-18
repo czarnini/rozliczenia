@@ -16,14 +16,18 @@ public class Model {
 	
     		
 	Bill 	rachunek1 = new Bill();
-	rachunek1.addPayer(platnik1, 160);
-	rachunek1.addPayer(platnik2, 20);
+	rachunek1.addPayer(platnik1, 45);
+	rachunek1.addPayer(platnik2, 60);
+	//rachunek1.addPayer(platnik3, 10);
+	//rachunek1.addPayer(platnik4, 50);
 
 	rachunek1.addDebtor(dluznik1);
 	rachunek1.addDebtor(dluznik2);
-	rachunek1.addDebtor(dluznik3);
-	
-	rachunek1.calculateNow(false);
+	//rachunek1.addDebtor(dluznik3);
+	rachunek1.addBonus(platnik1, 10.0);
+	rachunek1.addBonus(dluznik1, 20.0);
+	rachunek1.addBonus(dluznik2, 10.0);
+	rachunek1.calculateNow(true);
 
 	rachunek1.printAllDebts();
 	

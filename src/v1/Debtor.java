@@ -23,6 +23,11 @@ public class Debtor {
 		hasToPay = newDebt;
 	}
 	
+	public void increaseDebt(Double howMuch)
+	{
+		hasToPay += howMuch;
+	}
+	
 	public double getDebt()
 	{
 		return hasToPay;
@@ -44,7 +49,7 @@ public class Debtor {
 	{
 		for(Pair tmp : givesMoneyTo)
 		{
-			System.out.println(tmp.getFirst().getName()+"\t"+tmp.getSecond()+"\n");
+			System.out.println(tmp.getFirst().getName()+"\t"+tmp.getSecond());
 		}
 	}
 	
