@@ -12,19 +12,21 @@ public class Model {
     		dluznik2 = new Person("dluznik2"),
     		dluznik3 = new Person("dluznik3"),
     		dluznik4 = new Person("dluznik4");
+	
+	
     		
 	Bill 	rachunek1 = new Bill();
-	rachunek1.addPayer(platnik1, 60);
-	rachunek1.addPayer(platnik2, 40);
+	rachunek1.addPayer(platnik1, 160);
+	rachunek1.addPayer(platnik2, 20);
 
 	rachunek1.addDebtor(dluznik1);
 	rachunek1.addDebtor(dluznik2);
 	rachunek1.addDebtor(dluznik3);
+	
 	rachunek1.calculateNow(false);
 
-	dluznik1.showDebts();
-	dluznik2.showDebts();
-	dluznik3.showDebts();
+	rachunek1.printAllDebts();
+	
 	}
 	
 }

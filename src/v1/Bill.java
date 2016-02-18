@@ -6,18 +6,19 @@ import java.util.Collections;
 public class Bill {
 	private double amount;
 	private ArrayList <Pair>   whoPaid;
-	private ArrayList <Person> whoOwes;
+	private ArrayList <Debtor> whoOwes;
 	private ArrayList <Pair>   bonuses; 
 	
 	public Bill()
 	{
 		amount = 0;
-		whoOwes = new ArrayList <Person>();
+		whoOwes = new ArrayList <Debtor>();
 		whoPaid = new ArrayList <Pair>();
 	}
 	
-	public  void addDebtor(Person newDebtor)
+	public  void addDebtor(Person who)
 	{
+		Debtor newDebtor = new Debtor(who);
 		whoOwes.add(newDebtor);
 	}
 	
@@ -41,9 +42,9 @@ public class Bill {
 			Pair newPair = new Pair(tmp.getFirst() , 0.0);
 			bonuses.add(newPair);
 		}
-		for (Person tmp: whoOwes)
+		for (Debtor tmp: whoOwes)
 		{
-			Pair newPair = new Pair(tmp , 0.0);
+			Pair newPair = new Pair(tmp.getWho() , 0.0);
 			bonuses.add(newPair);
 		}
 		
@@ -61,6 +62,15 @@ public class Bill {
 		}
 	}
 	
+	public void printAllDebts()
+	{
+		for (Debtor tmp: whoOwes)
+		{
+			System.out.println(tmp.getWho().getName()+"  Owes:");
+			tmp.showDebts();
+			System.out.println("------------------------------");
+		}
+	}
 	public void calculateNow(Boolean bonus)
 	{
 		double  perCapita=0,
@@ -87,6 +97,11 @@ public class Bill {
 	    	for(Pair tmp: bonuses)
 	      		amount -= tmp.getSecond(); 
 	    perCapita = amount / peopleInEvent;
+	    
+	    for(Debtor tmp: whoOwes)
+	    {
+	    	tmp.setDebt(perCapita);
+	    }
 	    
 		// 3. Subtract perCapita from money given by payers
 		//	  3a. if payer had any bonuses subtract them as well 
@@ -131,29 +146,10 @@ public class Bill {
 	    	Pair tmp = whoPaid.get(i);
 	    	if (tmp.getSecond()<0)
 	    	{
-	    		Person newOwer = tmp.getFirst();
+	    		Debtor newOwer = new Debtor(tmp.getFirst());
 	    		tmp.multiply(-1.0);
 	    		whoOwes.add(0, newOwer);
-	    		
-	    		
-	    		double delta;
-	    		for(int j=0;  j < whoPaid.size(); ++j)
-	    		{
-	    			delta = whoPaid.get(j).getSecond() - tmp.getSecond();
-	    			if(delta <= 0)
-	    			{
-	    				newOwer.addDebtor(whoPaid.get(j)); // Jth person gets all his money from from tmp	
-	    				tmp.setSecond(delta * (-1.0));
-	    				whoPaid.get(j).setSecond(0.0);
-	    				whoPaid.remove(i);
-	    			}
-	    			else
-	    			{
-	    				newOwer.addDebtor(whoPaid.get(j).getFirst(), tmp.getSecond());
-	    				whoPaid.get(j).decrease(tmp.getSecond());
-	    				break;
-	    			}
-	    		}
+	    		newOwer.setDebt(tmp.getSecond());
 	    	} 
 	    	else break;
 	    }
@@ -161,34 +157,42 @@ public class Bill {
 		// 6. For each debtor take take next payer in the list and give him as much money as possible
 		//@TODO BONUSES!
 	    Collections.sort(whoPaid, new DecreasingComparator ());
-	    for(Person tmpDebt: whoOwes)
+	    for(Debtor tmpDebt: whoOwes)
 	    {
-	    	double hasToPay = perCapita;
-	    	System.out.println("Rozliczam: "+tmpDebt.getName());
-	    	
-	    	for(Pair tmpPay: whoPaid)
+	    	if(tmpDebt.getDebt() != 0.0)
 	    	{
-	    		double delta = tmpPay.getSecond() - hasToPay;
-	    		System.out.println("Daje: "+tmpPay.getFirst().getName());		
-	    		if (delta <= 0) // perCapita is greater (or equal)than tmpPay should get
-	    		{
-	    			tmpDebt.addDebtor(tmpPay);
-	    			tmpPay.setSecond(0.0);
-	    			hasToPay -= tmpPay.getSecond();
-	    			if (delta == 0)
-	    				break;
-	    		}
-	    		else  
-	    		{
-	    			tmpDebt.addDebtor(tmpPay.getFirst(), hasToPay);
-	    			tmpPay.decrease(hasToPay);
-	    			break;
-	    		}
-	    	
+		    	double hasToPay = tmpDebt.getDebt();
+		    	
+		    	for(Pair tmpPay: whoPaid)
+		    	{
+		    		if(tmpPay.getSecond() != 0.0)
+		    		{
+			    		double delta = tmpPay.getSecond() - hasToPay;	
+			    		if (delta <= 0) // hasToPay is greater (or equal)than tmpPay should get
+			    		{
+			    			tmpDebt.addCreditor(tmpPay);		// tmpDebt gives tmpPay as much as tmpPay needs
+			    			hasToPay -= tmpPay.getSecond();		// tmpDebt now has smaller debt
+			    			tmpDebt.setDebt(hasToPay);
+			    			tmpPay.setSecond(0.0);				//	tmpPay will not get any more money from now on 
+			    			if (delta == 0)						//  if tmpDebt paid his whole debt he does not need to pay anymore
+			    				break;
+			    		}
+			    		else  // tmpPay should get more money that tmpDebt can give him
+			    		{
+			    			tmpDebt.addCreditor(tmpPay.getFirst(), hasToPay); // tmpDebt gives all his money
+			    			tmpDebt.setDebt(0.0); 							  // and doesn't need to pay anymore
+			    			tmpPay.decrease(hasToPay);						  // but tmpPay needs to get some more money
+			    			break;											  // Proceed to next Debtor
+			    		}
+		    		}
+		    	
+		    	}
 	    	}
 	    }
 		
 		
 	}
 
+	
+	
 }

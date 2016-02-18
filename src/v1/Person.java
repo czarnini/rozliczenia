@@ -66,22 +66,5 @@ public class Person {
 		return personID;
 	}
 	
-	public void addDebtor(Pair newDebtor)
-	{
-		Pair pair = new Pair(newDebtor.getFirst(), newDebtor.getSecond());
-		whoOwsWhom.add(pair);
-	}
 	
-	public void addDebtor (Person whom, double howMuch)
-	{
-		Pair newDebtor = new Pair(whom, howMuch);
-		whoOwsWhom.add(newDebtor);
-	}
-	public void showDebts ()
-	{
-		for(Pair tmp : whoOwsWhom)
-		{
-			System.out.println(tmp.getFirst().getName()+"\t"+tmp.getSecond()+"\n");
-		}
-	}
 }
