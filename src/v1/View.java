@@ -63,7 +63,7 @@ public class View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO showDebtTable();
+				showDebtTable();
 				
 			}
 		});
@@ -77,7 +77,7 @@ public class View {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO newBill();
+				showNewBill();
 				    
 			}
 		});
@@ -87,6 +87,26 @@ public class View {
 		
 		frame.add(menuPanel);
 		frame.setVisible(true);
+	}
+	void createDebtTable()
+	{
+		
+	}
+	void createNewBill()
+	{
+		
+	}
+	void showMenu()
+	{
+		
+	}
+	void showDebtTable()
+	{
+		
+	}
+	void showNewBill()
+	{
+		
 	}
 
 }
