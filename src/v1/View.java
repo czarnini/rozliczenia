@@ -10,7 +10,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class View {
 	Controler controler;
@@ -99,6 +102,15 @@ public class View {
 		billPanel = new JPanel();
 		JButton allButton = new JButton ("Do rozliczenia");
 		JButton moreButton = new JButton ("Wiêcej opcji ->");
+		JButton addPayerButton = new JButton ("Dodaj p³atnika");
+		JButton addDeptorButton = new JButton ("Dodaj d³u¿nika");
+		JLabel kwotaLabel = new JLabel ("Zap³acona kwota: ");
+		JLabel payersLabel = new JLabel ("P³atnicy:");
+		JLabel debtorsLabel = new JLabel ("D³u¿nicy:");
+		JTextField kwotaTField = new JTextField();
+		JTable payersTable = new JTable(6,2);
+		JTable deptorsTable = new JTable (6,1);
+		
 	}
 	void showMenu()
 	{
