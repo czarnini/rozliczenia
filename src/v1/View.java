@@ -15,6 +15,9 @@ import javax.swing.JPanel;
 public class View {
 	Controler controler;
 	JFrame frame;
+	JPanel menuPanel;
+	JPanel billPanel;
+	JPanel debtTablePanel;
 	private int screenWidth;
 	private int screenHeight;
 	
@@ -33,10 +36,9 @@ public class View {
 	}
 	void createMenu()
 	{
-		frame.setBounds((screenWidth/2)-150, (screenHeight/2)-200, 300, 400);
 		
 		Dimension buttonSize = new Dimension(200,60);
-		JPanel menuPanel = new JPanel();
+		menuPanel = new JPanel();
 		JButton buttonNewBill = new JButton("Dodaj rachunek");
 		JButton buttonDebtTable = new JButton ("Tabela dï¿½ugï¿½w");
 		JButton buttonExit = new JButton ("Wyjdï¿½");
@@ -90,23 +92,34 @@ public class View {
 	}
 	void createDebtTable()
 	{
-		
+		//TODO: czy to teraz w ogóle jest?
 	}
 	void createNewBill()
 	{
-		
+		billPanel = new JPanel();
+		JButton allButton = new JButton ("Do rozliczenia");
+		JButton moreButton = new JButton ("Wiêcej opcji ->");
 	}
 	void showMenu()
 	{
-		
+		frame.setBounds((screenWidth/2)-150, (screenHeight/2)-200, 300, 400);
+		billPanel.setVisible(false);
+		debtTablePanel.setVisible(false);
+		menuPanel.setVisible(true);
 	}
 	void showDebtTable()
 	{
-		
+		frame.setBounds((screenWidth/2)-300, (screenHeight/2)-300, 600, 600);
+		billPanel.setVisible(false);
+		menuPanel.setVisible(false);
+		debtTablePanel.setVisible(true);
 	}
 	void showNewBill()
 	{
-		
+		frame.setBounds((screenWidth/2)-300, (screenHeight/2)-300, 600, 600);
+		menuPanel.setVisible(false);
+		debtTablePanel.setVisible(false);
+		billPanel.setVisible(true);
 	}
 
 }
