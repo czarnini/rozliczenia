@@ -16,5 +16,8 @@ public class Controler {
 	 void appStart()
 	 {
 		 view.createMenu();
+		 view.createNewBill();
+		 view.createDebtTable();
+		 view.showMenu();
 	 }
 }
