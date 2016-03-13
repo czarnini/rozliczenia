@@ -17,7 +17,8 @@ public class Controler {
 	 {
 		 view.createNewBill();
 		 view.createDebtTable();
-		 view.createMenu();
-		 view.showMenu();
+	//	 view.createMenu();
+	//	 view.showMenu();
+		 view.showNewBill();
 	 }
 }

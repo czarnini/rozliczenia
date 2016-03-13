@@ -2,6 +2,7 @@ package v1;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,8 +38,8 @@ public class View {
 		billPanel = new JPanel();
 		debtTablePanel = new JPanel();
 		frame.add(billPanel);
-		frame.add(debtTablePanel);
-		frame.add(menuPanel);
+	//	frame.add(debtTablePanel);
+	//	frame.add(menuPanel);
 		frame.setVisible(true);
 	}
 	void linkControler (Controler controler)
@@ -104,27 +105,109 @@ public class View {
 	void createNewBill()
 	{ //wymiary: 600x600
 		JButton allButton = new JButton ("Do rozliczenia");
-		JButton moreButton = new JButton ("Wiêcej opcji ->");
+		JButton moreButton = new JButton ("Wiêcej opcji >>");
+		JButton backButton = new JButton("Wróæ");
 		JButton addPayerButton = new JButton ("Dodaj p³atnika");
 		JButton addDeptorButton = new JButton ("Dodaj d³u¿nika");
 		JLabel kwotaLabel = new JLabel ("Zap³acona kwota: ");
 		JLabel payersLabel = new JLabel ("P³atnicy:");
 		JLabel debtorsLabel = new JLabel ("D³u¿nicy:");
 		JTextField kwotaTField = new JTextField();
-		JTable payersTable = new JTable(6,2);
-		JTable deptorsTable = new JTable (6,1);
+		JTable payersTable = new JTable(12,2);
+		JTable deptorsTable = new JTable (12,1);
 		SpringLayout layout = new SpringLayout();
 		billPanel.setLayout(layout);
 //layout.putConstraint(SpringLayout.NORTH, label1, 10, SpringLayout.NORTH, panel);
 //layout.putConstraint(SpringLayout.WEST, label1, 5, SpringLayout.WEST, panel);
-		layout.putConstraint(SpringLayout.NORTH, kwotaLabel, 10, SpringLayout.NORTH, billPanel);
-		layout.putConstraint(SpringLayout.WEST, kwotaLabel, 20, SpringLayout.WEST, billPanel);
+		kwotaLabel.setFont(new Font(null, Font.LAYOUT_LEFT_TO_RIGHT, 14));
+		layout.putConstraint(SpringLayout.NORTH, kwotaLabel,20, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, kwotaLabel, 150, SpringLayout.WEST, billPanel);
 		billPanel.add(kwotaLabel);
 		
+		kwotaTField.setPreferredSize(new Dimension (120,20));
+		layout.putConstraint(SpringLayout.NORTH, kwotaTField, 20, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, kwotaTField, 300, SpringLayout.WEST, billPanel);
+		billPanel.add(kwotaTField);
 		
-		frame.add(billPanel);
-		frame.setVisible(true);
+		addDeptorButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Okno dialogowe
+				
+			}
+		});
+		layout.putConstraint(SpringLayout.NORTH, addDeptorButton, 60, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, addDeptorButton, 400, SpringLayout.WEST, billPanel);
+		billPanel.add(addDeptorButton);
 		
+		addPayerButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		layout.putConstraint(SpringLayout.NORTH, addPayerButton, 60, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, addPayerButton, 100, SpringLayout.WEST, billPanel);
+		billPanel.add(addPayerButton);
+		
+		payersLabel.setFont(new Font(null, Font.LAYOUT_LEFT_TO_RIGHT, 14));
+		layout.putConstraint(SpringLayout.NORTH, payersLabel,100, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, payersLabel, 135, SpringLayout.WEST, billPanel);
+		billPanel.add(payersLabel);
+		
+		debtorsLabel.setFont(new Font(null, Font.LAYOUT_LEFT_TO_RIGHT, 14));
+		layout.putConstraint(SpringLayout.NORTH, debtorsLabel,100, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, debtorsLabel, 435, SpringLayout.WEST, billPanel);
+		billPanel.add(debtorsLabel);
+		
+		payersTable.setPreferredSize(new Dimension (200,200));
+		layout.putConstraint(SpringLayout.NORTH, payersTable,120, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, payersTable, 50, SpringLayout.WEST, billPanel);
+		billPanel.add(payersTable);
+		
+		deptorsTable.setPreferredSize(new Dimension (200,200));
+		layout.putConstraint(SpringLayout.NORTH, deptorsTable,120, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, deptorsTable, 350, SpringLayout.WEST, billPanel);
+		billPanel.add(deptorsTable);
+		
+		backButton.setPreferredSize(new Dimension(140, 28));
+		backButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//showMenu();
+			}
+		});
+		layout.putConstraint(SpringLayout.NORTH, backButton,350, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, backButton, 45, SpringLayout.WEST, billPanel);
+		billPanel.add(backButton);
+		
+		allButton.setPreferredSize(new Dimension(140, 28));
+		allButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+		layout.putConstraint(SpringLayout.NORTH, allButton,350, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, allButton, 230, SpringLayout.WEST, billPanel);
+		billPanel.add(allButton);
+		
+		moreButton.setPreferredSize(new Dimension(140, 28));
+		moreButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+		layout.putConstraint(SpringLayout.NORTH, moreButton,350, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, moreButton, 415, SpringLayout.WEST, billPanel);
+		billPanel.add(moreButton);
 	}
 	void showMenu()
 	{
