@@ -95,7 +95,7 @@ public class View {
 	}
 	void createDebtTable()
 	{
-		//TODO: czy to teraz w ogóle jest?
+		//TODO: czy to teraz w ogóle jest? Nie ustaliliœmy jak to ma wygl¹daæ...
 	}
 	void createNewBill()
 	{
