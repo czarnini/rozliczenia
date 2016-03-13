@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 public class View {
 	Controler controler;
@@ -32,6 +33,13 @@ public class View {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int)screenSize.getWidth();
 		screenHeight = (int)screenSize.getHeight();
+		menuPanel = new JPanel();
+		billPanel = new JPanel();
+		debtTablePanel = new JPanel();
+		frame.add(billPanel);
+		frame.add(debtTablePanel);
+		frame.add(menuPanel);
+		frame.setVisible(true);
 	}
 	void linkControler (Controler controler)
 	{
@@ -41,39 +49,11 @@ public class View {
 	{
 		
 		Dimension buttonSize = new Dimension(200,60);
-		menuPanel = new JPanel();
 		JButton buttonNewBill = new JButton("Dodaj rachunek");
-		JButton buttonDebtTable = new JButton ("Tabela dï¿½ugï¿½w");
-		JButton buttonExit = new JButton ("Wyjdï¿½");
+		JButton buttonDebtTable = new JButton ("Tabela d³ugów");
+		JButton buttonExit = new JButton ("WyjdŸ");
 		
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
-		
-		buttonExit.setMaximumSize(buttonSize);
-		buttonExit.setPreferredSize(buttonSize);
-		buttonExit.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonExit.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();		
-			}
-		});
-		menuPanel.add(Box.createVerticalStrut(40));
-		menuPanel.add(buttonExit);
-		
-		buttonDebtTable.setMaximumSize(buttonSize);
-		buttonDebtTable.setPreferredSize(buttonSize);
-		buttonDebtTable.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonDebtTable.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showDebtTable();
-				
-			}
-		});
-		menuPanel.add(Box.createGlue());
-		menuPanel.add(buttonDebtTable);
 		
 		buttonNewBill.setMaximumSize(buttonSize);
 		buttonNewBill.setPreferredSize(buttonSize);
@@ -86,20 +66,43 @@ public class View {
 				    
 			}
 		});
-		menuPanel.add(Box.createGlue());
-		menuPanel.add(buttonNewBill);
 		menuPanel.add(Box.createVerticalStrut(40));
+		menuPanel.add(buttonNewBill);
+		menuPanel.add(Box.createGlue());
 		
-		frame.add(menuPanel);
-		frame.setVisible(true);
+		buttonDebtTable.setMaximumSize(buttonSize);
+		buttonDebtTable.setPreferredSize(buttonSize);
+		buttonDebtTable.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonDebtTable.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showDebtTable();
+				
+			}
+		});
+		menuPanel.add(buttonDebtTable);
+		
+		buttonExit.setMaximumSize(buttonSize);
+		buttonExit.setPreferredSize(buttonSize);
+		buttonExit.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonExit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();		
+			}
+		});
+		menuPanel.add(Box.createGlue());
+		menuPanel.add(buttonExit);
+		menuPanel.add(Box.createVerticalStrut(40));
 	}
 	void createDebtTable()
 	{
 		//TODO: czy to teraz w ogóle jest? Nie ustaliliœmy jak to ma wygl¹daæ...
 	}
 	void createNewBill()
-	{
-		billPanel = new JPanel();
+	{ //wymiary: 600x600
 		JButton allButton = new JButton ("Do rozliczenia");
 		JButton moreButton = new JButton ("Wiêcej opcji ->");
 		JButton addPayerButton = new JButton ("Dodaj p³atnika");
@@ -110,6 +113,17 @@ public class View {
 		JTextField kwotaTField = new JTextField();
 		JTable payersTable = new JTable(6,2);
 		JTable deptorsTable = new JTable (6,1);
+		SpringLayout layout = new SpringLayout();
+		billPanel.setLayout(layout);
+//layout.putConstraint(SpringLayout.NORTH, label1, 10, SpringLayout.NORTH, panel);
+//layout.putConstraint(SpringLayout.WEST, label1, 5, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.NORTH, kwotaLabel, 10, SpringLayout.NORTH, billPanel);
+		layout.putConstraint(SpringLayout.WEST, kwotaLabel, 20, SpringLayout.WEST, billPanel);
+		billPanel.add(kwotaLabel);
+		
+		
+		frame.add(billPanel);
+		frame.setVisible(true);
 		
 	}
 	void showMenu()
